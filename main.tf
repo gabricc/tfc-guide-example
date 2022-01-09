@@ -1,6 +1,22 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.28.0"
+    }
+  }
+  backend "remote" {
+    organization = "slang"
+    # we prefix envs on Terraform Cloud with slang-
+    workspaces {
+      name = "tfc-guide-example"
+    }
+  }
+}
+
 provider "aws" {
-  region = var.region
-  profile = var.profile
+      region = var.region
+      profile = var.profile
 }
 
 data "aws_ami" "ubuntu" {
